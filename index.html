@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Product Agent 2.0</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+
+body{
+
+    background:#f5f7fb;
+
+    color:#1f2937;
+
+}
+
+
+
+.header{
+
+    height:64px;
+
+    background:#1e293b;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 40px;
+
+}
+
+
+
+.logo{
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+
+
+.container{
+
+    width:1100px;
+
+    margin:40px auto;
+
+}
+
+
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.08);
+
+}
+
+
+
+.title{
+
+    font-size:20px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+
+
+textarea{
+
+    width:100%;
+
+    height:180px;
+
+    padding:15px;
+
+    border:
+
+    1px solid #d1d5db;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+    resize:none;
+
+}
+
+
+
+.buttons{
+
+    margin-top:20px;
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+
+
+button{
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+}
+
+
+
+.primary{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+
+
+.secondary{
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+}
+
+
+
+.success{
+
+    background:#10b981;
+
+    color:white;
+
+}
+
+
+
+.warning{
+
+    background:#f59e0b;
+
+    color:white;
+
+}
+
+
+
+.project{
+
+    border:
+
+    1px solid #e5e7eb;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.project h3{
+
+    margin-bottom:10px;
+
+}
+
+
+
+.status{
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+
+
+.actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+
+.empty{
+
+    color:#64748b;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+
+<div class="logo">
+
+🚀 Product Agent 2.0
+
+</div>
+
+
+<div>
+
+智能产品原型生成平台
+
+</div>
+
+
+</div>
+
+
+
+<div class="container">
+
+
+
+<!-- 新需求 -->
+
+<div class="card">
+
+
+<div class="title">
+
+创建新的产品需求
+
+</div>
+
+
+
+<form action="/create" method="post">
+
+
+<textarea
+
+name="requirement"
+
+placeholder="
+请输入产品需求：
+
+例如：
+
+我要开发一个企业内部考试系统。
+
+包含：
+1. 员工报名考试
+2. 在线答题
+3. 成绩查看
+4. 管理后台
+">
+
+</textarea>
+
+
+
+<div class="buttons">
+
+
+<button 
+class="primary"
+type="submit">
+
+生成PRD和原型
+
+</button>
+
+
+<button
+class="secondary"
+type="reset">
+
+清空
+
+</button>
+
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+<!-- 历史项目 -->
+
+
+<div class="card">
+
+
+<div class="title">
+
+历史项目记录
+
+</div>
+
+
+
+{% if projects %}
+
+
+
+{% for project in projects %}
+
+
+
+<div class="project">
+
+
+<div>
+
+
+<h3>
+
+{{ project.name }}
+
+</h3>
+
+
+<p class="status">
+
+创建时间：
+
+{{ project.created_at }}
+
+</p>
+
+
+<p>
+
+
+PRD：
+
+{% if project.has_prd %}
+
+✅
+
+{% else %}
+
+❌
+
+{% endif %}
+
+
+
+&nbsp;&nbsp;
+
+
+原型：
+
+{% if project.has_html %}
+
+✅
+
+{% else %}
+
+❌
+
+{% endif %}
+
+
+</p>
+
+
+
+</div>
+
+
+
+
+<div class="actions">
+
+
+<a href="/projects/{{ project.id }}/prd">
+
+<button class="secondary">
+
+查看PRD
+
+</button>
+
+</a>
+
+
+
+<a href="/projects/{{ project.id }}/preview">
+
+<button class="success">
+
+查看原型
+
+</button>
+
+</a>
+
+
+
+<a href="/edit?project_id={{ project.id }}">
+
+<button class="warning">
+
+继续优化
+
+</button>
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+<br>
+
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+<div class="empty">
+
+暂无历史项目，请创建第一个需求。
+
+</div>
+
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</body>
+
+
+</html>
