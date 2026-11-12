@@ -73,3 +73,8 @@ node tests/test_task_delete.cjs
 已同步精简 PRD Prompt、需求范围锁定、按页面生成并拼装单个 HTML、模块级断点恢复、模型调用诊断和 Supabase 私有持久化。Workflow 保持一张整体业务流程，与 PRD 和原型同版本校验。保留本地 5001、免登录访客隔离和 Figma/HTML/Workflow 导出。196 项 Python 测试、11 组 JavaScript 单元测试通过；真实模型完成三页原型与整体 Workflow。模型产出的具体业务细节仍需人工核对。
 
 源码包 product-agent-2.0.zip 不包含密钥、用户项目或对话；配置说明见包内文档及部署仓库。线上：[Product Agent](https://product-agent-kparis.onrender.com)。
+
+
+## 2026-11-12 需求确认链路修复
+
+优化建议只在讨论阶段使用，整理后的草稿及PRD/原型/Workflow不再附加参考建议或待确认事项。已有确认PRD和最新修改共同作为输入，最新一轮修正优先；固定资料编号替代逐字抄写引用，修复空格导致的误报；过期前端回复不能覆盖新草稿。203项Python测试、12组JS测试通过，实际失败的九页修改稿已通过独立真实模型验证。原任务、已完成阶段成果和持久化逻辑保留。
