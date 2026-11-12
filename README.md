@@ -66,3 +66,10 @@ node tests/test_task_delete.cjs
 [部署说明](DEPLOYMENT.md) · [产品工作流说明](WORKFLOW.md)
 
 云端使用单进程、多线程的 Gunicorn，密钥和访问口令在平台环境变量中管理。免费实例使用临时磁盘，重启或重新部署可能清空线上记录。断点续生成需要任务文件仍在同一存储中；未使用永久磁盘时不能承诺跨部署恢复。模型使用仍可能计费或限流。
+
+
+## 2026-11-12 更新
+
+已同步精简 PRD Prompt、需求范围锁定、按页面生成并拼装单个 HTML、模块级断点恢复、模型调用诊断和 Supabase 私有持久化。Workflow 保持一张整体业务流程，与 PRD 和原型同版本校验。保留本地 5001、免登录访客隔离和 Figma/HTML/Workflow 导出。196 项 Python 测试、11 组 JavaScript 单元测试通过；真实模型完成三页原型与整体 Workflow。模型产出的具体业务细节仍需人工核对。
+
+源码包 product-agent-2.0.zip 不包含密钥、用户项目或对话；配置说明见包内文档及部署仓库。线上：[Product Agent](https://product-agent-kparis.onrender.com)。
